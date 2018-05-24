@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es5",
+      "es2017"
+    ],
+    "target": "es5",
+    "outDir": "./dist/server",
+    "baseUrl": "./server/src"
+  },
+  "include": [
+    "server/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+   "type": "mysql",
+   "host": "localhost",
+   "port": 3306,
+   "username": "vovansuper",
+   "password": "ova354",
+   "database": "UsersDb",
+   "synchronize": true,
+   "logging": "advanced-console",
+   "entities": [
+      "data/src/entity/**/*.ts",
+      "dist/data/entity/**/*.js"
+   ],
+   "migrations": [
+      "data/src/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "data/src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "data/src/entity",
+      "migrationsDir": "data/src/migration",
+      "subscribersDir": "data/src/subscriber"
+   }
+}

@@ -1,0 +1,25 @@
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="d2" #c2="ngModel" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                <img src="//ng-bootstrap.github.io/img/calendar-icon.svg"  />
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <hr/>
+      <button class="btn btn-lg btn-outline-primary" (click)="model = today">Select Today</button>
+      <hr/>
+    </div>
+    <div class="col-12">
+      <button [disabled]="!c2.valid" class="btn btn-lg btn-warning" (click)="getData()">Get Data!</button>
+    </div>
+  </div>
+</section>
