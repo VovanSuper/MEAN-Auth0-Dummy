@@ -1,9 +1,13 @@
 :host {
   margin-top: 2rem;
 }
-a {
-  cursor: pointer;
+section.container {
+  height: 100%;
+  display: flex;
+  flex: auto;
+  align-items: end;
 }
+
 img {
   width: 1.2rem;
   height: 1rem;
@@ -18,4 +22,16 @@ button.btn-outline-primary,
 button.btn-outline-secondary
 {
   vertical-align: middle;
+}
+.unauth-section {
+  margin-top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+a.a-loggin {
+  cursor: pointer;
+  font-style: italic;
+  color: #3717ad;
 }

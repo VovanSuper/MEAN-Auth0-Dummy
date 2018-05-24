@@ -7,11 +7,13 @@
     "ng": "ng",
     "start:client": "ng serve --host 0.0.0.0 --port 3000 --open",
     "start:client:watch": "ng serve --host 0.0.0.0 --port 3000 --open --watch",
-    "build:client": "ng build",
+    "build:client": "ng build --prod",
+    "build:client:w": "ng build --watch",
     "prebuild:client": "rimraf dist/**/*",
     "test:client": "ng test",
     "lint": "ng lint",
-    "start": "node server/",
+    "prestart": "yarn build:client",
+    "start": "node server",
     "prettier": "prettier --write \"**/*.ts\""
   },
   "repository": {
@@ -36,6 +38,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
+    "@types/sequelize": "^4.27.20",
     "auth0-js": "^9.5.1",
     "auth0-lock": "^11.6.1",
     "body-parser": "^1.18.3",

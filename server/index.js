@@ -1,56 +1,43 @@
-'use strict';
-
-//-- Require
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
-const config = require('./config.js');
 const path = require('path');
-//-- JWT check
 
-// @TODO: Remove .SAMPLE from /server/config.js.SAMPLE
-// and update with your proper Auth0 information
+const applyShutDownListeners = require('./data/helpers/handlers').applyShutDownListeners;
+const handleError = require('./data/helpers/handlers').handleError;
+const config = require('./config');
+const apiRouter = require('./routes/api.router');
+const sequelize = require('./data/helpers/setup').sequelize;;
+const StoryFunc = require('./data/Story');
+const seedDb = require('./data/helpers/seed.db');
 
-const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://${config.CLIENT_DOMAIN}/.well-known/jwks.json`
-  }),
-  // audience: config.AUTH0_AUDIENCE,
-  issuer: `https://${config.CLIENT_DOMAIN}/`,
-  algorithm: 'RS256'
-});
+let Story = require('./data/Story');
 
-//--- Set up app
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-app.use(express.static(path.join(process.cwd(), 'dist/client')));
+sequelize.sync().then(() => {
+  seedDb(Story).then((s1, s2, s3, s4) => {
 
-app.get('/api/all', (req, resp) => {
-  return resp.json({
-    name: 'Hello Planet',
-    route: '/api/all'
-  });
-});
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(cors());
+    app.use(express.static(path.join(process.cwd(), 'dist/client')));
+    app.use((req, resp, next) => {
+      console.log(req.originalUrl);
+      console.log('Body ', req.body);
+      next();
+    })
 
-app.get('/api/:forDate', (req, resp) => {
-  return res.json({
-    name: 'Hello Planet',
-    route: '/api'
-  });
-});
+    app.use('/api', apiRouter);
 
 
-app.get('*', (req, resp) => {
-  return resp.status(200).sendFile(path.join(process.cwd(), 'dist/client/index.html'));
+    app.get('*', (req, resp) => {
+      return resp.status(200).sendFile(path.join(process.cwd(), 'dist/client/index.html'));
+    })
+
+    let listener = app.listen(3000, () => {
+      console.log('Listening on localhost:3000');
+    });
+    applyShutDownListeners(listener);
+  })
+    .catch(e => handleError(e));
 })
-//--- Port
-app.listen(3000, () => {
-  console.log('Listening on localhost:3000');
-});
