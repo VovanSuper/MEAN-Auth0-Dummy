@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
+import { ApiService } from '../app/api.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { AuthService } from './../auth/auth.service';
 export class HomeComponent implements OnInit {
   model;
 
-  constructor(public auth: AuthService, ) { }
+  constructor(public auth: AuthService, public apiSvc: ApiService) { }
 
   ngOnInit() {
   }
@@ -18,7 +19,12 @@ export class HomeComponent implements OnInit {
     return new Date();
   }
 
-  getData() {
+  getData(date?: Date) {
+    if (this.auth.isAuthenticated()) {
+      this.apiSvc.getData().subscribe(data => {
+        console.log(data)
+      })
+    }
 
   }
 }

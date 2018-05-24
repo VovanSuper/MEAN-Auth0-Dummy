@@ -1,3 +1,6 @@
+:host {
+  margin-top: 2rem;
+}
 a {
   cursor: pointer;
 }
@@ -7,4 +10,12 @@ img {
   vertical-align: middle;
   border-style: none;
   cursor: pointer;
+}
+
+.input-group-append,
+input.form-control,
+button.btn-outline-primary,
+button.btn-outline-secondary
+{
+  vertical-align: middle;
 }

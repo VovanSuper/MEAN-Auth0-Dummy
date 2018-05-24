@@ -15,9 +15,10 @@ export class ApiService {
     private auth: AuthService
   ) { }
 
-  getDragons$(): Observable<any[]> {
+  getData(forDate?: Date): Observable<any[]> {
+    let dataUrl = forDate ? `${forDate}` : 'all';
     return this.http
-      .get<any[]>(`${this.baseUrl}/all`, {
+      .get<any[]>(`${this.baseUrl}/${dataUrl}`, {
         headers: new HttpHeaders().set(
           'Authorization', `Bearer ${this.auth.accessToken}`
         )

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'client/src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { LocationStrategy, PathLocationStrategy, Location } from '@angular/common';
 
 @Component({
@@ -10,9 +10,10 @@ import { LocationStrategy, PathLocationStrategy, Location } from '@angular/commo
 })
 export class AppComponent {
   isRoot: boolean;
+  title = 'Auth0 Mysql Data';
   constructor(public auth: AuthService, public location: Location) {
     auth.handleAuthentication();
-    this.isRoot = location.isCurrentPathEqualTo('/home');
+    this.isRoot = location.isCurrentPathEqualTo('/home' || 'home');
   }
 
 }
