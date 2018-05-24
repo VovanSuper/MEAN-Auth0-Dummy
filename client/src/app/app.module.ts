@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from '../home/home.component';
-import { CallbackComponent } from 'client/src/callback/callback.component';
+import { CallbackComponent } from '../callback/callback.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
