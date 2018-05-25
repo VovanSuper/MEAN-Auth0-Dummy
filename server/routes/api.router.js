@@ -1,43 +1,27 @@
 const express = require('express');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
 
-const handleError = require('../data/helpers/handlers').handleError;
-const config = require('../config');
+const  { handleError } = require('../helpers/handlers');
+const config = require('../helpers/config');
 let Story = require('../data/Story');
-let Op = require('../data/helpers/setup').Op;
+const jwtCheck = require('../middwares/auth.jwt');
+let { Op } = require('../helpers/setup');
 
 let apiRouter = express.Router();
 
-const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://${config.CLIENT_DOMAIN}/.well-known/jwks.json`
-  }),
-  // audience: config.AUTH0_AUDIENCE,
-  issuer: `https://${config.CLIENT_DOMAIN}/`,
-  algorithm: 'RS256'
-});
 
 apiRouter.route('/data')
+  .all([jwtCheck])
   .post((req, resp) => {
-    let forDate = req.body['forDate'];
 
-    console.log('ForDate: ', forDate);
-
+    let forDate = req.body['forDate'];                           
     Story.findAll({
       where: {
         created: {
           [Op.lt]: forDate,
-          [Op.gt]: new Date(forDate - 60 * 60 * 24)
+          [Op.gt]: new Date(new Date(forDate) - 1000*60*60*24)
         }
       }
-    }).then(data => {
-
-      console.log('Found Data for Date ', data);
-
+    }).then(data => {      console.log('Fordate in db ', data)
       return resp.json({
         opStatus: 'Ok',
         data: data

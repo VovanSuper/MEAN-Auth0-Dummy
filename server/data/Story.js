@@ -1,5 +1,5 @@
-const Sequelize = require('./helpers/setup').Sequelize;
-const sequelize = require('./helpers/setup').sequelize;
+const Sequelize = require('../helpers/setup').Sequelize;
+const sequelize = require('../helpers/setup').sequelize;
 
 const Story = sequelize.define('story', {
   id: {

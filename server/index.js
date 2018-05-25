@@ -4,14 +4,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
-const applyShutDownListeners = require('./data/helpers/handlers').applyShutDownListeners;
-const handleError = require('./data/helpers/handlers').handleError;
-const config = require('./config');
+const applyShutDownListeners = require('./helpers/handlers').applyShutDownListeners;
+const handleError = require('./helpers/handlers').handleError;
+const config = require('./helpers/config');
 const apiRouter = require('./routes/api.router');
-const sequelize = require('./data/helpers/setup').sequelize;;
+const sequelize = require('./helpers/setup').sequelize;;
 const StoryFunc = require('./data/Story');
-const seedDb = require('./data/helpers/seed.db');
-
+const seedDb = require('./helpers/seed.db');
+const loggerWare = require('./middwares/logger');
 let Story = require('./data/Story');
 
 sequelize.sync().then(() => {
@@ -21,11 +21,7 @@ sequelize.sync().then(() => {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cors());
     app.use(express.static(path.join(process.cwd(), 'dist/client')));
-    app.use((req, resp, next) => {
-      console.log(req.originalUrl);
-      console.log('Body ', req.body);
-      next();
-    })
+    app.use(loggerWare)
 
     app.use('/api', apiRouter);
 
