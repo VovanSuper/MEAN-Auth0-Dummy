@@ -18,18 +18,22 @@
   "main": "server/index.js",
   "scripts": {
     "ng": "ng",
+
     "ng:client": "ng serve --host 0.0.0.0 --port 3000 --open",
     "ng:client:w": "ng serve --host 0.0.0.0 --port 3000 --open --watch",
     "build:client": "ng build --prod",
     "build:client:w": "ng build --progress --watch",
     "prebuild:client": "rimraf dist/**/*",
     "prebuild:client:w": "rimraf dist/**/*",
+
     "test:client": "ng test",
     "lint": "ng lint",
     "prestart": "yarn build:client",
     "start": "node server",
+
     "nodemon": "cross-env NODE_ENV=development nodemon",
     "start:dev": "run-p --continue-on-error --print-name build:client:w nodemon",
+
     "prettier": "prettier --write \"**/*.ts\""
   },
   "repository": {

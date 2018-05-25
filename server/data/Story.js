@@ -1,4 +1,6 @@
+
 const { Sequelize, sequelize } = require('../helpers/setup');
+
 
 const Story = sequelize.define('story', {
   id: {
@@ -18,4 +20,5 @@ const Story = sequelize.define('story', {
     timestamps: false
   }
 );
+
 module.exports.Story = Story;

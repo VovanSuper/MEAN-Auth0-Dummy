@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
 
   selectToday() {
     const now = new Date();
+
     this.model = this.fromModel(now);
+
   }
 
   getData() {
