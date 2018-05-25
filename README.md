@@ -8,3 +8,5 @@ Steps to run this project:
 
 
 Development server runs with following --  `yarn start:dev`
+**In `scripts` dir script to spinup docker container with `mariaDb`, required volumes, and basic database, which could be used by app**
+**Basic compose added to spinup services (requires `mariaDb` container to be spinnedup) **
