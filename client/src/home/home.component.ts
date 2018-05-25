@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
 
   selectToday() {
     const now = new Date();
-    this.model = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+
+    this.model = this.fromModel(now);
+
   }
 
   getData() {
@@ -51,6 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   private toModel(date?: NgbDateStruct): Date {
-    return date ? new Date(date.year, date.month - 1, date.day) : null;
+    return date ? (new Date(date.year, date.month - 1, date.day)) : null;
   }
 }

@@ -1,28 +1,45 @@
 {
   "name": "mean-auth0-dummy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.2.0",
+  "description": "Dummy (very basic) Auth0 authentication demo app",
+  "keywords": [
+    "Auth0",
+    "Mean",
+    "Node.js",
+    "express.js",
+    "sequelize.js",
+    "Angular"
+  ],
+  "author": {
+    "name": "Vladimir Ovsyukov",
+    "email": "vovansuper@mail.ru"
+  },
+  "license": "ISC",
+  "main": "server/index.js",
   "scripts": {
     "ng": "ng",
-    "start:client": "ng serve --host 0.0.0.0 --port 3000 --open",
-    "start:client:watch": "ng serve --host 0.0.0.0 --port 3000 --open --watch",
+
+    "ng:client": "ng serve --host 0.0.0.0 --port 3000 --open",
+    "ng:client:w": "ng serve --host 0.0.0.0 --port 3000 --open --watch",
     "build:client": "ng build --prod",
-    "build:client:w": "ng build --watch",
+    "build:client:w": "ng build --progress --watch",
     "prebuild:client": "rimraf dist/**/*",
+    "prebuild:client:w": "rimraf dist/**/*",
+
     "test:client": "ng test",
     "lint": "ng lint",
     "prestart": "yarn build:client",
     "start": "node server",
+
+    "nodemon": "cross-env NODE_ENV=development nodemon",
+    "start:dev": "run-p --continue-on-error --print-name build:client:w nodemon",
+
     "prettier": "prettier --write \"**/*.ts\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VovanSuper/MEAN-Auth0-Dummy.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/VovanSuper/MEAN-Auth0-Dummy/issues"
   },
@@ -68,6 +85,7 @@
     "codelyzer": "^4.3.0",
     "jest": "^22.4.4",
     "nodemon": "^1.17.5",
+    "npm-run-all": "^4.1.3",
     "prettier": "^1.12.1",
     "rimraf": "^2.6.2",
     "ts-jest": "^22.4.6",

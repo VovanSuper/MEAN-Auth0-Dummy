@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  mean-auth0-dummy:
+    image: mean-auth0-dummy
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+      - 3306:3306
+    depends_on:
+      - my-maria
+  
+  my-maria:
+    image: my-maria
