@@ -1,6 +1,7 @@
-# Auth0 Mysql Project Build with TypeORM, Nest.js, Angular 6
+# Awesome Project Build with TypeORM
         
 Steps to run this project:
 
 1. Run `npm i` command
-3. Run `npm run start:client ` and `npm run start:prod ` command
+2. Setup database settings inside `ormconfig.json` file
+3. Run `npm start` command

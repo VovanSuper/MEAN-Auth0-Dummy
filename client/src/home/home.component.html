@@ -1,25 +1,63 @@
-<section class="container">
-  <div class="row">
-    <div class="col-12">
-      <form class="form-inline">
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="d2" #c2="ngModel" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                <img src="//ng-bootstrap.github.io/img/calendar-icon.svg"  />
-              </button>
+<section *ngIf="auth.isAuthenticated()" class="container">
+  <ng-container *ngIf="!data || data.length == 0; else dataTable">
+    <div class="row">
+      <div class="col-12 form-items">
+        <form class="form-inline" #frm="ngForm">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" name="d2" #c2="ngModel" [(ngModel)]="model" ngbDatepicker #d2="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                  <img src="//ng-bootstrap.github.io/img/calendar-icon.svg" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+    </div>
+    <hr />
 
-      <hr/>
-      <button class="btn btn-lg btn-outline-primary" (click)="model = today">Select Today</button>
-      <hr/>
+    <div class="row">
+      <div class="col-12">
+        <button [disabled]="frm.pristine || !c2.valid" class="btn btn-secondary btn-lg btn-block" (click)="getData()">Get Data!</button>
+      </div>
     </div>
-    <div class="col-12">
-      <button [disabled]="!c2.valid" class="btn btn-lg btn-warning" (click)="getData()">Get Data!</button>
+  </ng-container>
+
+  <ng-template #dataTable>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered table-dark table-hover">
+          <thead class="thead-dark">
+            <th scope="col">#</th>
+            <th scope="col">Created:</th>
+            <th scope="col">Content</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data">
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.created}}</td>
+              <td>{{item.text}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+
+    <hr>
+    <div class="row">
+      <button class="btn btn-dark btn-lg btn-block" (click)="data = null">Reset</button>
+    </div>
+  </ng-template>
+  <!-- <div class="col-6">
+      <button class="btn btn-lg btn-outline-primary" (click)="selectToday()">Select Today</button>
+    </div> -->
+
+
+</section>
+
+<section class="unauth-section" *ngIf="!auth.isAuthenticated()">
+  <span> must authenticate to watch data... </span>
+  <a class="a-loggin" (click)="auth.login()">Log in</a>
 </section>
