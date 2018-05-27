@@ -147,7 +147,7 @@ module.exports = "main.container {\r\n  height: 90vh;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-dark\">\r\n  <div class=\"container-fluid\">\r\n    <a class=\"navbar-brand\" routerLink=\"/\">{{title}}</a>\r\n    <form class=\"form-inline\">\r\n      <!-- <a *ngIf=\"!isRoot\" class=\"btn btn-primary my-2 my-sm-0 mr-2\" routerLink=\"/\" type=\"button\">\r\n        Home\r\n      </a> -->\r\n\r\n      <button id=\"qsLoginBtn\" class=\"btn btn-primary my-2 my-sm-0\" *ngIf=\"!auth.isAuthenticated()\" (click)=\"auth.login()\" type=\"button\">\r\n        Log In\r\n      </button>\r\n\r\n      <button id=\"qsLogoutBtn\" class=\"btn btn-primary my-2 my-sm-0\" *ngIf=\"auth.isAuthenticated()\" (click)=\"auth.logout()\" type=\"button\">\r\n        Log Out\r\n      </button>\r\n\r\n    </form>\r\n  </div>\r\n</nav>\r\n\r\n<main role=\"main\" class=\"container\">\r\n  <router-outlet></router-outlet>\r\n</main>"
+module.exports = "<nav class=\"navbar navbar-dark bg-dark\">\r\n  <div class=\"container-fluid\">\r\n    <a class=\"navbar-brand\" routerLink=\"/\">{{title}}</a>\r\n    <form class=\"form-inline\">\r\n      <a *ngIf=\"auth.isAuthenticated()\" href='csv/db.csv' class=\"btn btn-secondary my-2 my-sm-0 mr-2\" type=\"button\">\r\n        Db Dump\r\n      </a>\r\n\r\n      <button id=\"qsLoginBtn\" class=\"btn btn-primary my-2 my-sm-0\" *ngIf=\"!auth.isAuthenticated()\" (click)=\"auth.login()\" type=\"button\">\r\n        Log In\r\n      </button>\r\n\r\n      <button id=\"qsLogoutBtn\" class=\"btn btn-primary my-2 my-sm-0\" *ngIf=\"auth.isAuthenticated()\" (click)=\"auth.logout()\" type=\"button\">\r\n        Log Out\r\n      </button>\r\n\r\n    </form>\r\n  </div>\r\n</nav>\r\n\r\n<main role=\"main\" class=\"container\">\r\n  <router-outlet></router-outlet>\r\n</main>"
 
 /***/ }),
 
@@ -391,7 +391,7 @@ var AUTH_CONFIG = {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".loading {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  height: 100vh;\n  width: 100vw;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: #fff;\n}"
+module.exports = ".loading {\r\n  position: absolute;\r\n  display: flex;\r\n  justify-content: center;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background-color: #fff;\r\n}"
 
 /***/ }),
 
@@ -402,7 +402,7 @@ module.exports = ".loading {\n  position: absolute;\n  display: flex;\n  justify
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loading\">\n  <img src=\"assets/loading.svg\" alt=\"loading\">\n</div>\n"
+module.exports = "<div class=\"loading\">\r\n  <img src=\"assets/loading.svg\" alt=\"loading\">\r\n</div>\r\n"
 
 /***/ }),
 
@@ -492,7 +492,7 @@ module.exports = ":host {\r\n  margin-top: 2rem;\r\n}\r\nsection.container {\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"auth.isAuthenticated()\" class=\"container\">\r\n  <ng-container *ngIf=\"!data || data.length == 0; else dataTable\">\r\n    <div class=\"row\">\r\n      <div class=\"col-12 form-items\">\r\n        <form class=\"form-inline\" #frm=\"ngForm\">\r\n          <div class=\"form-group\">\r\n            <div class=\"input-group\">\r\n              <input class=\"form-control\" name=\"d2\" #c2=\"ngModel\" [(ngModel)]=\"model\" ngbDatepicker #d2=\"ngbDatepicker\">\r\n              <div class=\"input-group-append\">\r\n                <button class=\"btn btn-outline-secondary\" (click)=\"d2.toggle()\" type=\"button\">\r\n                  <img src=\"//ng-bootstrap.github.io/img/calendar-icon.svg\" />\r\n                </button>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <div class=\"row\">\r\n      <div class=\"col-12\">\r\n        <button [disabled]=\"frm.pristine || !c2.valid\" class=\"btn btn-secondary btn-lg btn-block\" (click)=\"getData()\">Get Data!</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n\r\n  <ng-template #dataTable>\r\n    <div class=\"row\">\r\n      <div class=\"col-12\">\r\n        <table class=\"table table-bordered table-dark table-hover\">\r\n          <thead class=\"thead-dark\">\r\n            <th scope=\"col\">#</th>\r\n            <th scope=\"col\">Created:</th>\r\n            <th scope=\"col\">Content</th>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let item of data\">\r\n              <th scope=\"row\">{{item.id}}</th>\r\n              <td>{{item.created}}</td>\r\n              <td>{{item.text}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n\r\n    <hr>\r\n    <div class=\"row\">\r\n      <button class=\"btn btn-dark btn-lg btn-block\" (click)=\"data = null\">Reset</button>\r\n    </div>\r\n  </ng-template>\r\n  <!-- <div class=\"col-6\">\r\n      <button class=\"btn btn-lg btn-outline-primary\" (click)=\"selectToday()\">Select Today</button>\r\n    </div> -->\r\n\r\n\r\n</section>\r\n\r\n<section class=\"unauth-section\" *ngIf=\"!auth.isAuthenticated()\">\r\n  <span> must authenticate to watch data... </span>\r\n  <a class=\"a-loggin\" (click)=\"auth.login()\">Log in</a>\r\n</section>"
+module.exports = "<section *ngIf=\"auth.isAuthenticated()\" class=\"container\">\r\n  <ng-container *ngIf=\"!data || data.length == 0; else dataTable\">\r\n    <div class=\"row\">\r\n      <div class=\"col-12 form-items\">\r\n        <form class=\"form-inline\" #frm=\"ngForm\">\r\n          <div class=\"form-group\">\r\n            <div class=\"input-group\">\r\n              <input class=\"form-control\" name=\"d2\" #c2=\"ngModel\" [(ngModel)]=\"model\" ngbDatepicker #d2=\"ngbDatepicker\">\r\n              <div class=\"input-group-append\">\r\n                <button class=\"btn btn-outline-secondary\" (click)=\"d2.toggle()\" type=\"button\">\r\n                  <img src=\"//ng-bootstrap.github.io/img/calendar-icon.svg\" />\r\n                </button>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <div class=\"row\">\r\n      <div class=\"col-12\">\r\n        <button [disabled]=\"frm.pristine || frm.invalid || !c2.valid\" class=\"btn btn-secondary btn-lg btn-block\" (click)=\"getData()\">Get Data!</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n\r\n  <ng-template #dataTable>\r\n    <div class=\"row\">\r\n      <div class=\"col-12\">\r\n        <table class=\"table table-bordered table-dark table-hover\">\r\n          <thead class=\"thead-dark\">\r\n            <th scope=\"col\">#</th>\r\n            <th scope=\"col\">Created:</th>\r\n            <th scope=\"col\">Content</th>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let item of data\">\r\n              <th scope=\"row\">{{item.id}}</th>\r\n              <td>{{item.created}}</td>\r\n              <td>{{item.text}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n\r\n    <hr>\r\n    <div class=\"row\">\r\n      <button class=\"btn btn-dark btn-lg btn-block\" (click)=\"data = null\">Reset</button>\r\n    </div>\r\n  </ng-template>\r\n  <!-- <div class=\"col-6\">\r\n      <button class=\"btn btn-lg btn-outline-primary\" (click)=\"selectToday()\">Select Today</button>\r\n    </div> -->\r\n\r\n\r\n</section>\r\n\r\n<section class=\"unauth-section\" *ngIf=\"!auth.isAuthenticated()\">\r\n  <span> must authenticate to watch data... </span>\r\n  <a class=\"a-loggin\" (click)=\"auth.login()\">Log in</a>\r\n</section>"
 
 /***/ }),
 
@@ -603,7 +603,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Projects\Others\MEAN-Auth0-Dummy\client\src\main.ts */"./client/src/main.ts");
+module.exports = __webpack_require__(/*! C:\MEAN-Auth0-Dummy\client\src\main.ts */"./client/src/main.ts");
 
 
 /***/ })

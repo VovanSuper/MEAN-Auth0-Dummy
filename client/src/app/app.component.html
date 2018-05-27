@@ -2,9 +2,9 @@
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">{{title}}</a>
     <form class="form-inline">
-      <!-- <a *ngIf="!isRoot" class="btn btn-primary my-2 my-sm-0 mr-2" routerLink="/" type="button">
-        Home
-      </a> -->
+      <a *ngIf="auth.isAuthenticated()" href='csv/db.csv' class="btn btn-secondary my-2 my-sm-0 mr-2" type="button">
+        Db Dump
+      </a>
 
       <button id="qsLoginBtn" class="btn btn-primary my-2 my-sm-0" *ngIf="!auth.isAuthenticated()" (click)="auth.login()" type="button">
         Log In

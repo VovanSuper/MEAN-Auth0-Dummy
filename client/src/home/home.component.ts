@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../auth/auth.service';
 import { ApiService } from '../app/api.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { dataModel } from '../helpers/types';
 
 
@@ -14,6 +14,7 @@ import { dataModel } from '../helpers/types';
 export class HomeComponent implements OnInit {
   model;
   data: dataModel[] = [];
+  csv: any;
 
   constructor(public auth: AuthService, public apiSvc: ApiService) { }
 
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
     if (this.auth.isAuthenticated()) {
       this.apiSvc.getData(this.toModel(this.model)).subscribe(
         resp => {
-          if(resp.opStatus !== 'Ok')
+          if (resp.opStatus !== 'Ok')
             throw `Bad operation Status:: ${resp.opStatus}`
           this.data = resp.data;
         },

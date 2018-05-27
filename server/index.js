@@ -3,10 +3,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-
 const { applyShutDownListeners, handleError } = require('./helpers/handlers');
 const config = require('./helpers/config');
 const apiRouter = require('./routes/api.router');
+const csvRouter = require('./routes/csv.router');
 const { sequelize } = require('./helpers/setup');;
 const seedDb = require('./helpers/seed.db');
 const loggerWare = require('./middwares/logger');
@@ -21,12 +21,12 @@ sequelize.sync().then(() => {
       .use(express.static(path.join(process.cwd(), 'dist/client')))
       .use(loggerWare)
 
-      .use('/api', apiRouter);
+      .use('/api', apiRouter)
+      .use('/csv', csvRouter)
 
-
-    app.get('*', (req, resp) => {
-      return resp.status(200).sendFile(path.join(process.cwd(), 'dist/client/index.html'));
-    })
+      .get('*', (req, resp) => {
+        return resp.status(200).sendFile(path.join(process.cwd(), 'dist/client/index.html'));
+      })
 
     let listener = app.listen(3000, () => {
       console.log('Listening on localhost:3000');

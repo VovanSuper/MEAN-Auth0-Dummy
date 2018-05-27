@@ -37,7 +37,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* You can add global styles to this file, and also import other style files */\n"
+module.exports = "/* You can add global styles to this file, and also import other style files */\r\n"
 
 /***/ }),
 
@@ -539,7 +539,7 @@ module.exports = function (css) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Projects\Others\MEAN-Auth0-Dummy\client\src\styles.css */"./client/src/styles.css");
+module.exports = __webpack_require__(/*! C:\MEAN-Auth0-Dummy\client\src\styles.css */"./client/src/styles.css");
 
 
 /***/ })
